@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Simulador del examen de Ascenso Docente 2019, Educación para el Trabajo.">
+    <title>Forma 2 · Prepárate · Ascenso Docente 2019</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html" aria-label="Volver al catálogo de exámenes">
+          <span class="brand-mark" aria-hidden="true">P</span>
+          <span><strong>Prepárate</strong><small>Ascenso docente</small></span>
+        </a>
+        <div class="topbar-actions">
+          <nav class="form-switch" aria-label="Seleccionar examen"><a href="index.html">Exámenes</a><a href="forma1.html">2019 · F1</a><a class="active" href="forma2.html">2019 · F2</a></nav>
+          <span class="save-state"><span class="save-dot"></span> Progreso guardado</span>
+          <button class="icon-button" id="resetButton" type="button" title="Reiniciar práctica" aria-label="Reiniciar práctica">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.34 5.66M20 4v7h-7"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <main id="welcomeView" class="welcome-view">
+        <section class="hero-card">
+          <div class="hero-copy">
+            <span class="eyebrow">Banco oficial · 2019 · Forma 2</span>
+            <h1>Educación para el Trabajo</h1>
+            <p class="hero-lead">Practica con las 60 preguntas de la prueba de Ascenso Docente y revisa cada respuesta a tu ritmo.</p>
+            <div class="exam-facts" aria-label="Datos del examen">
+              <div><strong>60</strong><span>preguntas</span></div>
+              <div><strong>3 h</strong><span>tiempo referencial</span></div>
+              <div><strong>90</strong><span>puntos máximos</span></div>
+            </div>
+            <button id="startButton" class="primary-button hero-button" type="button">
+              <span id="startButtonText">Comenzar práctica</span><span aria-hidden="true">→</span>
+            </button>
+            <p class="resume-note" id="resumeNote" hidden>Tu avance anterior está listo para continuar.</p>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="paper-card paper-back"></div>
+            <div class="paper-card paper-front">
+              <span class="paper-label">EPT</span>
+              <div class="paper-line wide"></div><div class="paper-line"></div>
+              <div class="mock-option active"><span>A</span></div>
+              <div class="mock-option"><span>B</span></div>
+              <div class="mock-option"><span>C</span></div>
+              <div class="paper-score">2019</div>
+            </div>
+            <div class="spark spark-one">✦</div><div class="spark spark-two">✦</div>
+          </div>
+        </section>
+        <section class="how-card">
+          <h2>Practica con confianza</h2>
+          <div class="how-grid">
+            <article><span>01</span><h3>Elige una respuesta</h3><p>Marca una de las tres alternativas del examen.</p></article>
+            <article><span>02</span><h3>Comprueba al instante</h3><p>Descubre si acertaste y reconoce la respuesta correcta.</p></article>
+            <article><span>03</span><h3>Revisa tu resultado</h3><p>Obtén tu puntaje y vuelve a las preguntas que necesitas reforzar.</p></article>
+          </div>
+        </section>
+      </main>
+
+      <main id="quizView" class="quiz-view" hidden>
+        <aside class="question-nav" aria-label="Navegación de preguntas">
+          <div class="nav-heading"><div><span>Tu avance</span><strong id="progressLabel">0 de 60</strong></div><span id="progressPercent">0%</span></div>
+          <div class="progress-track"><span id="progressBar"></span></div>
+          <div id="questionGrid" class="question-grid"></div>
+          <div class="legend"><span><i class="answered"></i> Respondida</span><span><i class="current"></i> Actual</span></div>
+        </aside>
+
+        <section class="question-stage">
+          <div class="question-toolbar">
+            <button id="mobileNavButton" class="mobile-nav-button" type="button" aria-expanded="false"><span>Preguntas</span><strong id="mobileProgress">1 / 60</strong></button>
+            <div class="question-position">Pregunta <strong id="questionNumber">1</strong> de 60</div>
+            <button id="finishTopButton" class="text-button" type="button">Finalizar práctica</button>
+          </div>
+
+          <article class="question-card" id="questionCard">
+            <div class="question-tag">Educación para el Trabajo</div>
+            <h2 id="questionPrompt" tabindex="-1"></h2>
+            <div id="questionVisual"></div>
+            <div id="optionsList" class="options-list" role="radiogroup" aria-label="Alternativas"></div>
+            <div id="feedbackBox" class="feedback-box" role="status" hidden></div>
+          </article>
+
+          <div class="question-actions">
+            <button id="previousButton" class="secondary-button" type="button"><span aria-hidden="true">←</span> Anterior</button>
+            <button id="checkButton" class="primary-button" type="button" disabled>Comprobar respuesta</button>
+            <button id="nextButton" class="primary-button" type="button" hidden>Siguiente <span aria-hidden="true">→</span></button>
+          </div>
+        </section>
+      </main>
+
+      <main id="resultsView" class="results-view" hidden>
+        <section class="results-card">
+          <div id="resultRing" class="result-ring"><div><strong id="resultPercent">0%</strong><span>de aciertos</span></div></div>
+          <div class="results-copy">
+            <span class="eyebrow">Práctica completada</span>
+            <h1 id="resultTitle">¡Buen trabajo!</h1>
+            <p id="resultMessage"></p>
+            <div class="result-stats">
+              <div><span class="stat-icon correct">✓</span><p><strong id="correctCount">0</strong><small>Correctas</small></p></div>
+              <div><span class="stat-icon wrong">×</span><p><strong id="wrongCount">0</strong><small>Incorrectas</small></p></div>
+              <div><span class="stat-icon score">★</span><p><strong id="scoreCount">0</strong><small>Puntos de 90</small></p></div>
+            </div>
+            <div class="results-actions">
+              <button id="reviewButton" class="primary-button" type="button">Revisar respuestas</button>
+              <button id="tryAgainButton" class="secondary-button" type="button">Intentar de nuevo</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="finishDialog" class="finish-dialog">
+      <button class="dialog-close" id="closeDialogButton" aria-label="Cerrar">×</button>
+      <span class="dialog-icon">✓</span>
+      <h2>¿Finalizar la práctica?</h2>
+      <p id="finishDialogText">Podrás revisar todas tus respuestas después.</p>
+      <div><button id="cancelFinishButton" class="secondary-button" type="button">Seguir practicando</button><button id="confirmFinishButton" class="primary-button" type="button">Ver resultados</button></div>
+    </dialog>
+
+    <script>window.EXAM_CONFIG = { form: 2, questionsGlobal: 'EXAM_QUESTIONS_FORM2', storageKey: 'ascenso-docente-ept-2019-v2' };</script>
+    <script src="questions-forma2.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
